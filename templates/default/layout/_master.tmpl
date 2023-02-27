@@ -9,7 +9,7 @@
   {{>partials/head}}
   {{^redirect_url}}
   <body>
-    <header class="sticky-top">
+    <header class="sticky-top bg-body">
       {{^_disableNavbar}}
       {{>partials/navbar}}
       {{/_disableNavbar}}
@@ -22,14 +22,14 @@
     <main class="container-fluid hide-when-not-search">
       {{^_disableToc}}
       <div class="left-rail">
-        <div class="sticky-top">
+        <div class="sticky-top bg-body">
           {{>partials/toc}}
         </div>
       </div>
       {{/_disableToc}}
 
       <div class="content-rail" data-uid="{{uid}}">
-        <div class="sticky-top">
+        <div class="sticky-top bg-body">
           {{>partials/actionbar}}
         </div>
 
@@ -44,7 +44,7 @@
 
       {{^_disableAffix}}
       <div class="right-rail">
-        <div class="sticky-top">
+        <div class="sticky-top bg-body">
           {{>partials/affix}}
         </div>
       </div>
