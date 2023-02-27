@@ -3,6 +3,7 @@
 
 import $ from 'jquery'
 
+/** Gets the content property of the specified HTML <meta> tag */
 export function meta(name: string): string {
   return (document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement)?.content
 }

@@ -1,8 +1,15 @@
 {{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
 
 <div class="sidenav hide-when-search">
-  <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">{{__global.tocToggleButton}}</a>
-  <div class="sidetoggle collapse" id="sidetoggle">
-    <div id="sidetoc"></div>
+  <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas">Toggle table of contents</button>
+
+  <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="sidetoc"></div>
+    </div>
   </div>
 </div>
