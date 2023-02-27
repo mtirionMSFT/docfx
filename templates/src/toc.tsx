@@ -26,7 +26,7 @@ export async function renderToc(): Promise<TocNode[]> {
   let activeElement: React.RefObject<HTMLElement>
 
   items.forEach(initTocNodes)
-  document.getElementById('sidetoc')?.appendChild(<ul>{renderTocNodes(items)}</ul>)
+  document.getElementById('tocNodes')?.appendChild(<ul>{renderTocNodes(items)}</ul>)
   registerTocEvents()
 
   if (activeElement) {

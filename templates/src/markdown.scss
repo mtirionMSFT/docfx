@@ -3,6 +3,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
 */
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.xref,
+.text-break {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.article img {
+  max-width: 100%;
+}
+
 /* Alerts */
 .alert h5 {
   text-transform: uppercase;

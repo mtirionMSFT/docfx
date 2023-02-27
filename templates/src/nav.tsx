@@ -60,7 +60,7 @@ export function renderInThisArticle() {
     return
   }
 
-  const affix = document.getElementById('affix')
+  const affix = document.getElementById('inThisArticle')
   affix?.appendChild(<h5>In this article</h5>)
   affix?.appendChild(<ul class='nav bs-docs-sidenav'>{
     Array.from(h2s).map(h2 => <li><a href={`#${h2.id}`}>{h2.innerText}</a></li>)

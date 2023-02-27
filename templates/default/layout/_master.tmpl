@@ -9,34 +9,46 @@
   {{>partials/head}}
   {{^redirect_url}}
   <body>
-    <header>
+    <header class="sticky-top">
       {{^_disableNavbar}}
       {{>partials/navbar}}
       {{/_disableNavbar}}
     </header>
 
     {{#_enableSearch}}
-    <div class="container">
-      {{>partials/searchResults}}
-    </div>
+    {{>partials/search-results}}
     {{/_enableSearch}}
 
-    <main class="container hide-when-search">
+    <main class="container-fluid hide-when-not-search">
       {{^_disableToc}}
-      {{>partials/toc}}
+      <div class="left-rail">
+        <div class="sticky-top">
+          {{>partials/toc}}
+        </div>
+      </div>
       {{/_disableToc}}
 
-      {{^_disableBreadcrumb}}
-      {{>partials/breadcrumb}}
-      {{/_disableBreadcrumb}}
-      
-      {{^_disableAffix}}
-      {{>partials/affix}}
-      {{/_disableAffix}}
+      <div class="content-rail" data-uid="{{uid}}">
+        <div class="sticky-top">
+          {{>partials/actionbar}}
+        </div>
 
-      <article class="content wrap" id="_content" data-uid="{{uid}}">
-        {{!body}}
-      </article>
+        <article>
+          {{!body}}
+        </article>
+
+        {{^_disableContribution}}
+        {{>partials/edit-link}}
+        {{/_disableContribution}}
+      </div>
+
+      {{^_disableAffix}}
+      <div class="right-rail">
+        <div class="sticky-top">
+          {{>partials/affix}}
+        </div>
+      </div>
+      {{/_disableAffix}}
     </main>
 
     {{^_disableFooter}}

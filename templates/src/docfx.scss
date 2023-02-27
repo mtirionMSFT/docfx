@@ -3,60 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
 */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.xref,
-.text-break {
-  word-wrap: break-word;
-  word-break: break-word;
-}
-
-article span.small.pull-right {
-  margin-top: 20px;
-}
-
-.article.grid-right {
-  margin-left: 280px;
-}
-
-.article img {
-  max-width: 100%;
-}
-
-.sample-response .response-content {
-  max-height: 200px;
-}
-
-.footer {
-  border-top: 1px solid #e7e7e7;
-  background-color: #f8f8f8;
-  padding: 15px 0;
-}
-
-/* For printer */
-@media print {
-  .article.grid-right {
-    margin-top: 0;
-    margin-left: 0;
-  }
-
-  .sideaffix {
-    display: none;
-  }
-
-  .mobile-hide {
-    display: none;
-  }
-
-  .footer {
-    display: none;
-  }
-}
-
+@import "layout.scss";
 @import "nav.scss";
 @import "toc.scss";
 @import "markdown.scss";

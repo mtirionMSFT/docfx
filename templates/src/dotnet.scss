@@ -68,3 +68,11 @@ article {
   font-weight: bold;
   margin-top: 2em;
 }
+
+article span.small.pull-right {
+  margin-top: 20px;
+}
+
+.sample-response .response-content {
+  max-height: 200px;
+}

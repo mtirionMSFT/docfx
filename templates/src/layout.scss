@@ -1,0 +1,52 @@
+/**
+ * Copyright (c) Microsoft Corporation. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+*/
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+  >header {
+
+  }
+
+  >footer {
+  }
+
+  >main {
+    display: flex;
+
+    .sticky-top {
+      top: 76.664px;
+    } 
+    
+    .left-rail {
+      min-width: 16rem;
+    }
+
+    .content-rail {
+      min-width: 0;
+    }
+
+    .right-rail {
+      min-width: 10rem;
+
+      @include media-breakpoint-down(lg) {
+        display: none;
+      }
+    }
+  }
+
+  @media print {
+    >header, >footer {
+      display: none;
+    }
+
+    >main {
+      >.left-rail, >.right-rail {
+        display: none;
+      }
+    }
+  }
+}
+  

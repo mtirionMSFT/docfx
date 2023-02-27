@@ -1,6 +1,6 @@
 {{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
 
-<div class="sidenav hide-when-search">
+<div class="toc">
   <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas">Toggle table of contents</button>
 
   <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
@@ -9,7 +9,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <div id="sidetoc"></div>
+      <div id="tocNodes"></div>
     </div>
   </div>
 </div>
