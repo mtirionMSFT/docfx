@@ -47,7 +47,7 @@ export async function renderNavbar(): Promise<NavItem[]> {
   return activeItem ? [activeItem] : []
 }
 
-export function renderBreadcrumb(items: (NavItem | TocNode )[]) {
+export function renderBreadcrumb(items: (NavItem | TocNode)[]) {
   document.getElementById('breadcrumb')?.appendChild(
     <ol class='breadcrumb'>
       {items.map(i => <li class='breadcrumb-item'><a href={i.href}>{i.name}</a></li>)}
@@ -81,7 +81,7 @@ function findActiveItem(items: NavItem[]): NavItem {
   return activeItem
 }
 
-function commonUrlPrefix(url: URL, base: URL): number  {
+function commonUrlPrefix(url: URL, base: URL): number {
   const urlSegments = url.pathname.split('/')
   const baseSegments = base.pathname.split('/')
   let i = 0

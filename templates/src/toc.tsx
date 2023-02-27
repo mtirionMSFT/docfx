@@ -66,7 +66,7 @@ export async function renderToc(): Promise<TocNode[]> {
       const { href, name, items } = node
       const isLeaf = !items || items.length <= 0
       const active = activeNodes.includes(node)
-      const activeClass= active ? 'active' : null
+      const activeClass = active ? 'active' : null
 
       if (active) {
         activeElement = li
@@ -116,7 +116,7 @@ export async function renderToc(): Promise<TocNode[]> {
       const toc = document.getElementById('toc')
       const anchors = toc.querySelectorAll('a')
 
-      if (filter == '') {
+      if (filter === '') {
         anchors.forEach(a => a.parentElement.classList.remove('filtered', 'hide'))
         return
       }
