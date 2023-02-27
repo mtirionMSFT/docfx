@@ -24,7 +24,7 @@ export async function renderNavbar(): Promise<NavItem[]> {
     return []
   }
 
-  const navUrl = new URL(navrel.replace(/.html$/g, '.json'), window.location.href)
+  const navUrl = new URL(navrel, window.location.href)
   const { items } = await fetch(navUrl).then(res => res.json())
   const navItems = items.map(a => ({ name: a.name, href: new URL(a.href, navUrl) }))
   if (navItems.length <= 0) {

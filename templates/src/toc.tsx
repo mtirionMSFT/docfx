@@ -19,7 +19,7 @@ export async function renderToc(): Promise<TocNode[]> {
     return []
   }
 
-  const tocUrl = new URL(tocrel.replace(/.html$/g, '.json'), window.location.href)
+  const tocUrl = new URL(tocrel, window.location.href)
   const { items } = await (await fetch(tocUrl)).json()
 
   const activeNodes = []
