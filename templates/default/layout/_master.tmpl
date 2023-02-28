@@ -9,7 +9,7 @@
   {{>partials/head}}
   {{^redirect_url}}
   <body>
-    <header class="sticky-top bg-body">
+    <header class="sticky-top bg-body d-print-none">
       {{^_disableNavbar}}
       {{>partials/navbar}}
       {{/_disableNavbar}}
@@ -21,7 +21,7 @@
 
     <main class="container-fluid hide-when-not-search">
       {{^_disableToc}}
-      <div class="left-rail">
+      <div class="left-rail d-print-none">
         <div class="sticky-top bg-body">
           {{>partials/toc}}
         </div>
@@ -29,7 +29,7 @@
       {{/_disableToc}}
 
       <div class="content-rail" data-uid="{{uid}}">
-        <div class="sticky-top bg-body">
+        <div class="sticky-top bg-body d-print-none">
           {{>partials/actionbar}}
         </div>
 
@@ -43,7 +43,7 @@
       </div>
 
       {{^_disableAffix}}
-      <div class="right-rail">
+      <div class="right-rail d-print-none">
         <div class="sticky-top bg-body">
           {{>partials/affix}}
         </div>

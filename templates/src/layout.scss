@@ -20,6 +20,10 @@ body {
     
     .left-rail {
       min-width: 16rem;
+
+      @include media-breakpoint-down(md) {
+        display: none;
+      }
     }
 
     .content-rail {
@@ -30,18 +34,6 @@ body {
       min-width: 10rem;
 
       @include media-breakpoint-down(lg) {
-        display: none;
-      }
-    }
-  }
-
-  @media print {
-    >header, >footer {
-      display: none;
-    }
-
-    >main {
-      >.left-rail, >.right-rail {
         display: none;
       }
     }
