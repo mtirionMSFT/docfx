@@ -47,6 +47,11 @@ namespace Example
         ```
         Classes in assemblies are by definition complete.
         ```
+        
+            for (int i = 0; i &lt; 10; i++)
+            {
+                DoSomething();
+            }
     </summary>
     <remarks>
     <see href=""https://example.org""/>
@@ -144,6 +149,11 @@ Partial classes <xref href=""System.AccessViolationException"" data-throw-if-not
 ```
 Classes in assemblies are by definition complete.
 ```
+
+    for (int i = 0; i &lt; 10; i++)
+    {
+        DoSomething();
+    }
 ".Replace("\r\n", "\n"), summary);
 
             var returns = commentModel.Returns;

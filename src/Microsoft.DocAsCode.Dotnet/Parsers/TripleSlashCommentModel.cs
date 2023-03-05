@@ -786,7 +786,7 @@ namespace Microsoft.DocAsCode.Dotnet
             {
                 return xml;
             }
-
+            
             foreach (var line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line))
