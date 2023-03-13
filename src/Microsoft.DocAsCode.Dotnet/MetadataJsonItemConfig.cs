@@ -58,5 +58,8 @@ namespace Microsoft.DocAsCode
 
         [JsonProperty("namespaceLayout")]
         public NamespaceLayout NamespaceLayout{  get; set; }
+
+        [JsonProperty("ignoreCompilationErrors")]
+        public bool IgnoreCompilationErrors { get; set; }
     }
 }

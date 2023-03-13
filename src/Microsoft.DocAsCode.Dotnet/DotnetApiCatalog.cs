@@ -118,6 +118,7 @@ namespace Microsoft.DocAsCode.Dotnet
                 DisableDefaultFilter = configModel?.DisableDefaultFilter ?? false,
                 NoRestore = configModel?.NoRestore ?? false,
                 NamespaceLayout = configModel?.NamespaceLayout ?? NamespaceLayout.Flattened,
+                IgnoreCompilationErrors = configModel?.IgnoreCompilationErrors ?? false,
                 Files = expandedFiles.Items.SelectMany(s => s.Files).ToList(),
                 References = expandedReferences?.Items.SelectMany(s => s.Files).ToList(),
             };

@@ -29,28 +29,24 @@ namespace Microsoft.DocAsCode.Dotnet
                 """),
         };
 
-        public static bool CheckDiagnostics(this Compilation compilation)
+        public static bool CheckDiagnostics(this Compilation compilation, bool ignoreCompilationErrors)
         {
             var errorCount = 0;
 
             foreach (var diagnostic in compilation.GetDeclarationDiagnostics())
             {
-                if (diagnostic.IsSuppressed)
+                if (diagnostic.IsSuppressed || !(diagnostic.Severity is DiagnosticSeverity.Warning or DiagnosticSeverity.Error))
                     continue;
 
-                if (diagnostic.Severity is DiagnosticSeverity.Warning)
+                if (diagnostic.Severity is DiagnosticSeverity.Warning || ignoreCompilationErrors)
                 {
                     Logger.LogWarning(diagnostic.ToString());
                     continue;
                 }
 
-                if (diagnostic.Severity is DiagnosticSeverity.Error)
-                {
-                    Logger.LogError(diagnostic.ToString());
-
-                    if (++errorCount >= 20)
-                        break;
-                }
+                Logger.LogError(diagnostic.ToString());
+                if (++errorCount >= 20)
+                    break;
             }
 
             return errorCount > 0;

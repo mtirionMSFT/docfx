@@ -33,6 +33,8 @@ namespace Microsoft.DocAsCode.Dotnet
 
         public NamespaceLayout NamespaceLayout { get; init; }
 
+        public bool IgnoreCompilationErrors { get; init; }
+
         public Dictionary<string, string> MSBuildProperties { get; init; }
     }
 }
