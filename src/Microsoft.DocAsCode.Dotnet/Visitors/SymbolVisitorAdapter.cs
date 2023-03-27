@@ -23,15 +23,6 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
     private readonly string _codeSourceBasePath;
     private readonly SymbolFilter _filter;
 
-    /// <summary>
-    /// dd
-    /// </summary>
-    /// <param name="compilation"></param>
-    /// <param name="generator"></param>
-    /// <param name="options"></param>
-    /// <param name="filter"></param>
-    /// <param name="extensionMethods"></param>
-    /// <exception cref="Exception">sdf</exception>
     public SymbolVisitorAdapter(Compilation compilation, YamlModelGenerator generator, ExtractMetadataConfig options, SymbolFilter filter, IMethodSymbol[] extensionMethods)
     {
         _compilation = compilation;
@@ -67,10 +58,14 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
         }
 
         var documentationComment = symbol.GetDocumentationComment(_compilation, expandIncludes: true, expandInheritdoc: true);
-        item.Summary = documentationComment.SummaryText;
-        item.Remarks = documentationComment.RemarksText;
-        item.Exceptions = documentationComment.ExceptionTypes;
-        item.Examples = documentationComment.ExampleText;
+        item.Summary = FormatDocumentationComment(symbol, documentationComment.SummaryText);
+        item.Remarks = FormatDocumentationComment(symbol, documentationComment.RemarksText);
+        item.Exceptions = documentationComment.ExceptionTypes.Select(e => new ExceptionInfo
+        {
+            Type = e,
+            Description = FormatDocumentationComment(symbol, string.Join("\n", documentationComment.GetExceptionTexts(e))),
+        }).ToList();
+        item.Examples = new() { FormatDocumentationComment(symbol, documentationComment.ExampleText) };
         //// TODO: seealsos
 
         if (item.Exceptions != null)
@@ -727,16 +722,6 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
         }
     }
 
-    private XmlCommentParserContext GetXmlCommentParserContext(MetadataItem item)
-    {
-        return new XmlCommentParserContext
-        {
-            AddReferenceDelegate = GetAddReferenceDelegate(item),
-            Source = item.Source,
-            CodeSourceBasePath = _codeSourceBasePath
-        };
-    }
-
     private List<AttributeInfo> GetAttributeInfo(ImmutableArray<AttributeData> attributes)
     {
         if (attributes.Length == 0)
@@ -875,5 +860,15 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
             // only record the id now, the value would be fed at later phase after merge
             item.References[id] = null;
         };
+    }
+
+    private string FormatDocumentationComment(ISymbol symbol, string rawXml)
+    {
+
+    }
+
+    private string ResolveCref(string cref, bool seealso)
+    {
+        return null;
     }
 }

@@ -110,25 +110,6 @@ internal static class VisitorHelper
         return uidBody;
     }
 
-    public static ApiParameter GetParameterDescription(ISymbol symbol, MetadataItem item, string id, bool isReturn, XmlCommentParserContext context)
-    {
-        return new ApiParameter
-        {
-            Name = isReturn ? null : symbol.Name,
-            Type = id,
-            //Description = comment, TODO:
-        };
-    }
-
-    public static ApiParameter GetTypeParameterDescription(ITypeParameterSymbol symbol, MetadataItem item, XmlCommentParserContext context)
-    {
-        return new ApiParameter
-        {
-            Name = symbol.Name,
-            //Description = comment, TODO:
-        };
-    }
-
     public static SourceDetail GetSourceDetail(ISymbol symbol, Compilation compilation)
     {
         // For namespace, definition is meaningless
