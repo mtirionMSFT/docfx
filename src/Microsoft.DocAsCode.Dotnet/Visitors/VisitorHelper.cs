@@ -19,22 +19,6 @@ internal static class VisitorHelper
     public static string GlobalNamespaceId { get; set; }
     private static readonly Regex GenericMethodPostFix = new(@"``\d+$", RegexOptions.Compiled);
 
-    public static void FeedComments(MetadataItem item, XmlCommentParserContext context)
-    {
-        if (!string.IsNullOrEmpty(item.RawComment))
-        {
-            var commentModel = XmlComment.Parse(item.RawComment, context);
-            if (commentModel == null) return;
-            item.Summary = commentModel.Summary;
-            item.Remarks = commentModel.Remarks;
-            item.Exceptions = commentModel.Exceptions;
-            item.SeeAlsos = commentModel.SeeAlsos;
-            item.Examples = commentModel.Examples;
-            item.InheritDoc = commentModel.InheritDoc;
-            item.CommentModel = commentModel;
-        }
-    }
-
     public static string GetId(ISymbol symbol)
     {
         if (symbol == null)
@@ -128,22 +112,20 @@ internal static class VisitorHelper
 
     public static ApiParameter GetParameterDescription(ISymbol symbol, MetadataItem item, string id, bool isReturn, XmlCommentParserContext context)
     {
-        string comment = isReturn ? item.CommentModel?.Returns : item.CommentModel?.GetParameter(symbol.Name);
         return new ApiParameter
         {
             Name = isReturn ? null : symbol.Name,
             Type = id,
-            Description = comment,
+            //Description = comment, TODO:
         };
     }
 
     public static ApiParameter GetTypeParameterDescription(ITypeParameterSymbol symbol, MetadataItem item, XmlCommentParserContext context)
     {
-        string comment = item.CommentModel?.GetTypeParameter(symbol.Name);
         return new ApiParameter
         {
             Name = symbol.Name,
-            Description = comment,
+            //Description = comment, TODO:
         };
     }
 

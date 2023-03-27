@@ -98,38 +98,6 @@ internal class XmlComment
         }
     }
 
-    public void CopyInheritedData(XmlComment src)
-    {
-        if (src == null)
-        {
-            throw new ArgumentNullException(nameof(src));
-        }
-
-        Summary = Summary ?? src.Summary;
-        Remarks = Remarks ?? src.Remarks;
-        Returns = Returns ?? src.Returns;
-        if (Exceptions == null && src.Exceptions != null)
-        {
-            Exceptions = src.Exceptions.Select(e => e.Clone()).ToList();
-        }
-        if (SeeAlsos == null && src.SeeAlsos != null)
-        {
-            SeeAlsos = src.SeeAlsos.Select(s => s.Clone()).ToList();
-        }
-        if (Examples == null && src.Examples != null)
-        {
-            Examples = new List<string>(src.Examples);
-        }
-        if (Parameters == null && src.Parameters != null)
-        {
-            Parameters = new Dictionary<string, string>(src.Parameters);
-        }
-        if (TypeParameters == null && src.TypeParameters != null)
-        {
-            TypeParameters = new Dictionary<string, string>(src.TypeParameters);
-        }
-    }
-
     public string GetParameter(string name)
     {
         if (string.IsNullOrEmpty(name))

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.DocAsCode.DataContracts.ManagedReference;
 using Microsoft.DocAsCode.Exceptions;
 
@@ -22,6 +23,15 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
     private readonly string _codeSourceBasePath;
     private readonly SymbolFilter _filter;
 
+    /// <summary>
+    /// dd
+    /// </summary>
+    /// <param name="compilation"></param>
+    /// <param name="generator"></param>
+    /// <param name="options"></param>
+    /// <param name="filter"></param>
+    /// <param name="extensionMethods"></param>
+    /// <exception cref="Exception">sdf</exception>
     public SymbolVisitorAdapter(Compilation compilation, YamlModelGenerator generator, ExtractMetadataConfig options, SymbolFilter filter, IMethodSymbol[] extensionMethods)
     {
         _compilation = compilation;
@@ -37,11 +47,11 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
         {
             return null;
         }
+
         var item = new MetadataItem
         {
             Name = VisitorHelper.GetId(symbol),
             CommentId = VisitorHelper.GetCommentId(symbol),
-            RawComment = symbol.GetDocumentationCommentXml(expandIncludes: true),
         };
 
         item.DisplayNames = new SortedList<SyntaxLanguage, string>();
@@ -50,13 +60,19 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
         item.Source = VisitorHelper.GetSourceDetail(symbol, _compilation);
         var assemblyName = symbol.ContainingAssembly?.Name;
         item.AssemblyNameList = string.IsNullOrEmpty(assemblyName) ? null : new List<string> { assemblyName };
-        if (!(symbol is INamespaceSymbol))
+        if (symbol is not INamespaceSymbol)
         {
             var namespaceName = VisitorHelper.GetId(symbol.ContainingNamespace);
             item.NamespaceName = string.IsNullOrEmpty(namespaceName) ? null : namespaceName;
         }
 
-        VisitorHelper.FeedComments(item, GetXmlCommentParserContext(item));
+        var documentationComment = symbol.GetDocumentationComment(_compilation, expandIncludes: true, expandInheritdoc: true);
+        item.Summary = documentationComment.SummaryText;
+        item.Remarks = documentationComment.RemarksText;
+        item.Exceptions = documentationComment.ExceptionTypes;
+        item.Examples = documentationComment.ExampleText;
+        //// TODO: seealsos
+
         if (item.Exceptions != null)
         {
             foreach (var exceptions in item.Exceptions)
@@ -82,7 +98,6 @@ internal class SymbolVisitorAdapter : SymbolVisitor<MetadataItem>
         var item = new MetadataItem
         {
             Name = VisitorHelper.GetId(symbol),
-            RawComment = symbol.GetDocumentationCommentXml(expandIncludes: true),
         };
 
         item.DisplayNames = new SortedList<SyntaxLanguage, string>
